@@ -10,7 +10,12 @@ public class FoodSpawningScript : MonoBehaviour
     public int AppleCurrentY;
     void Start()
     {
-        SpawnApple();
+        int AreaX = 0;
+        int AreaY = 0;
+        AppleCurrentX = AreaX;
+        AppleCurrentY = AreaY;
+        Vector3 AppleSpawnPosition = new Vector3(AreaX, AreaY, 0);
+        SpawnedApple = Instantiate(ApplePrefab, AppleSpawnPosition, Quaternion.identity);
     }
 
     public void SpawnApple()

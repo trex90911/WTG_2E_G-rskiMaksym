@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class SnakeMovement : MonoBehaviour
+public class SnakeScript : MonoBehaviour
 {
     public GameObject SnakeBodyPrefab;
     public List<Transform> SnakeSegments = new List<Transform>();
@@ -11,10 +11,7 @@ public class SnakeMovement : MonoBehaviour
     private int FramesPassed;
     public int SnakeCurrentX;
     public int SnakeCurrentY;
-    void Start()
-    {
-        SnakeSegments.Add(this.transform);
-    }
+    void Start() => SnakeSegments.Add(this.transform);
     void MoveSnakeSegments()
     {
         for (int i = SnakeSegments.Count - 1; i > 0; i--)
@@ -57,25 +54,25 @@ public class SnakeMovement : MonoBehaviour
             FramesPassed = 0;
         }    
 
-        if (Input.GetKeyDown(KeyCode.W) && PlayerDirection != 2) //up
+        if (Input.GetKeyDown(KeyCode.W) && PlayerDirection != 2)
         {
             transform.eulerAngles = new Vector3(0, 0, -90);
-            PlayerDirection = 1;
+            PlayerDirection = 1; //up
         }
-        if (Input.GetKeyDown(KeyCode.S) && PlayerDirection != 1)//down
+        if (Input.GetKeyDown(KeyCode.S) && PlayerDirection != 1)
         {
             transform.eulerAngles = new Vector3(0, 0, 90);
-            PlayerDirection = 2;
+            PlayerDirection = 2; //down
         }
-        if (Input.GetKeyDown(KeyCode.A) && PlayerDirection != 4)//left
+        if (Input.GetKeyDown(KeyCode.A) && PlayerDirection != 4)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
-            PlayerDirection = 3;
+            PlayerDirection = 3; //left
         }
-        if (Input.GetKeyDown(KeyCode.D) && PlayerDirection != 3)//right
+        if (Input.GetKeyDown(KeyCode.D) && PlayerDirection != 3)
         {
             transform.eulerAngles = new Vector3(0, 0, 180);
-            PlayerDirection = 4;
+            PlayerDirection = 4; //right
         }
 
     }
