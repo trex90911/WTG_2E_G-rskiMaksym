@@ -6,7 +6,7 @@ using UnityEngine;
 public class SnakeScript : MonoBehaviour
 {
     public GameObject SnakeBodyPrefab;
-    public List<Transform> SnakeSegments = new List<Transform>();
+    public List<Transform> SnakeSegmentList = new List<Transform>();
     public int SnakeCurrentX;
     public int SnakeCurrentY;
     private int PlayerDirection;
@@ -18,17 +18,17 @@ public class SnakeScript : MonoBehaviour
    
     void Start()
     {
-        SnakeSegments.Add(this.transform);
+        SnakeSegmentList.Add(this.transform);
         Time.fixedDeltaTime = 0.10f;
     }
     void MoveSnakeSegments()
     {
-        for (int i = SnakeSegments.Count - 1; i > 0; i--)
+        for (int i = SnakeSegmentList.Count - 1; i > 0; i--)
         {
-            SnakeSegments[i].position = SnakeSegments[i - 1].position;
+            SnakeSegmentList[i].position = SnakeSegmentList[i - 1].position;
         }
 
-        SnakeSegments[0].position = new Vector3(SnakeCurrentX, SnakeCurrentY, 0);
+        SnakeSegmentList[0].position = new Vector3(SnakeCurrentX, SnakeCurrentY, 0);
     }
     void MoveSnakeHead()
     {
@@ -113,9 +113,10 @@ public class SnakeScript : MonoBehaviour
     }
     public void AddSegments()
     {
-        GameObject newSegment = Instantiate(SnakeBodyPrefab, SnakeSegments[SnakeSegments.Count - 1].position, Quaternion.identity);
+        GameObject newSegment = Instantiate(SnakeBodyPrefab, SnakeSegmentList[SnakeSegmentList.Count - 1].position, Quaternion.identity);
 
-        SnakeSegments.Add(newSegment.transform);
+        SnakeSegmentList.Add(newSegment.transform);
     }
 }
-   
+ //To be done list: death, (actual) score, sprites (better), snake body part movement, death when out of bounds, maybe snake anims, input queueing (double turn like in original), sliding instead of teleporting, music, menu, pause, original mechanics (if time)
+ //bugs: apples spawn in snake

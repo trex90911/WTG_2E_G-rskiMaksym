@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: faa5bb926f58f6c4e93b7542feddd44a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3066038, g: 1, b: 0.33590072, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -203,7 +203,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.103, y: 0.103, z: -1}
+  m_LocalScale: {x: 0.1619, y: 0.1619, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SnakeBodyPrefab: {fileID: 1617399355838372269, guid: 0c83df177181f9c4881995ea2e71a59c, type: 3}
-  SnakeSegments: []
+  SnakeSegmentList: []
   SnakeCurrentX: 0
   SnakeCurrentY: 0
 --- !u!114 &83257076
@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc518cce2fea2654796ad7b85579b646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SnakeScript: {fileID: 83257075}
   ApplePrefab: {fileID: 1373813236964036348, guid: e3e109d4be8cbf04b83caca17c92272d, type: 3}
   SpawnedApple: {fileID: 0}
   AppleCurrentX: 0
@@ -623,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

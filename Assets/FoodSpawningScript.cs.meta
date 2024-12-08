@@ -4,7 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - SnakeScript: {instanceID: 0}
   - ApplePrefab: {fileID: 1373813236964036348, guid: e3e109d4be8cbf04b83caca17c92272d, type: 3}
+  - SpawnedApple: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

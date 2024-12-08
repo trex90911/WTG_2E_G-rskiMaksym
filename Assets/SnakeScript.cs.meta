@@ -3,7 +3,8 @@ guid: 9d77d0ff292c36b43a2ca6f432ecd2c9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - SnakeBodyPrefab: {fileID: 1373813236964036348, guid: e3e109d4be8cbf04b83caca17c92272d, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
