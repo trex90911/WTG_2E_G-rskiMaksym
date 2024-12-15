@@ -19,7 +19,7 @@ public class SnakeScript : MonoBehaviour
     void Start()
     {
         SnakeSegments.Add(this.transform);
-        Time.fixedDeltaTime = 0.10f;
+        Time.fixedDeltaTime = 0.10f; 
     }
     void MoveSnakeSegments()
     {
