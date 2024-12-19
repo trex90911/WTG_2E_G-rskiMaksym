@@ -1,7 +1,14 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+public enum Direction
+{ 
+    Up = 1, 
+    Down, 
+    Left, 
+    Right 
+}
 
 public class SnakeScript : MonoBehaviour
 {
@@ -9,12 +16,13 @@ public class SnakeScript : MonoBehaviour
     public List<Transform> SnakeSegments = new List<Transform>();
     public int SnakeCurrentX;
     public int SnakeCurrentY;
-    private int PlayerDirection;
-    private int FramesPassed;
-    private int SnakeWantMoveUp;
-    private int SnakeWantMoveDown;
-    private int SnakeWantMoveLeft;
-    private int SnakeWantMoveRight;
+
+    [SerializeField]
+    private float MoveDelay = 0.3f;
+    private float moveTimer = 0f;
+    private Direction PlayerDirection = Direction.Right;
+    private Vector2 input = Vector2.right, 
+        lastFrameInput = Vector2.right;
    
     void Start()
     {
@@ -32,82 +40,72 @@ public class SnakeScript : MonoBehaviour
     }
     void MoveSnakeHead()
     {
-        if (PlayerDirection == 1)//up
+        switch (PlayerDirection) //możesz użyć switch case oraz enuma zamiast kilku ifów
         {
-            transform.position += new Vector3(0, 1, 0);
-            SnakeCurrentY++;
-        }
-        if (PlayerDirection == 2)//down
-        {
-            transform.position += new Vector3(0, -1, 0);
-            SnakeCurrentY--;
-        }
-        if (PlayerDirection == 3)//left
-        {
-            transform.position += new Vector3(-1, 0, 0);
-            SnakeCurrentX--;
-        }
-        if (PlayerDirection == 4)//right
-        {
-            transform.position += new Vector3(1, 0, 0);
-            SnakeCurrentX++;
+            case Direction.Up:
+                transform.position += Vector3.up;
+                SnakeCurrentY++;
+                break;
+            case Direction.Down:
+                transform.position += Vector3.down;
+                SnakeCurrentY--;
+                break;
+            case Direction.Left:
+                transform.position += Vector3.left;
+                SnakeCurrentX--;
+            break;
+                case Direction.Right:
+                transform.position += Vector3.right;
+                SnakeCurrentX++;
+                break;
         }
     }
     private void FixedUpdate()
     {
-        FramesPassed++;
-        if (FramesPassed == 3)
+        moveTimer += Time.fixedDeltaTime;
+
+        if (moveTimer >= MoveDelay)
         {
-            if (SnakeWantMoveUp == 1)
+            if (input.y > 0f && lastFrameInput.y == 0f)
             {
-                transform.eulerAngles = new Vector3(0, 0, -90);
-                PlayerDirection = 1; //up
-                SnakeWantMoveUp = 0;
+                PlayerDirection = Direction.Up;
+                transform.eulerAngles = new Vector3(0f, 0f, -90f);
             }
-            if (SnakeWantMoveDown == 1)
+            else if (input.y < 0f && lastFrameInput.y == 0f)
             {
-                transform.eulerAngles = new Vector3(0, 0, 90);
-                PlayerDirection = 2; //down
-                SnakeWantMoveDown = 0;
+                PlayerDirection = Direction.Down;
+                transform.eulerAngles = new Vector3(0f, 0f, 90f);
             }
-            if (SnakeWantMoveLeft == 1)
+            else if (input.x < 0f && lastFrameInput.x == 0f)
             {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-                PlayerDirection = 3; //left
-                SnakeWantMoveLeft = 0;
+                PlayerDirection = Direction.Left;
+                transform.eulerAngles = Vector3.zero;
             }
-            if (SnakeWantMoveRight == 1)
+            else if (input.x > 0f && lastFrameInput.x == 0f)
             {
-                transform.eulerAngles = new Vector3(0, 0, 180);
-                PlayerDirection = 4; //right
-                SnakeWantMoveRight = 0;
+                PlayerDirection = Direction.Right;
+                transform.eulerAngles = new Vector3(0f, 0f, 180f);
             }
+
+            lastFrameInput = input;
 
             MoveSnakeHead();
             MoveSnakeSegments();
-            FramesPassed = 0;
+            moveTimer = 0f;
         }
     }
     void Update()
     {
-        
+        var x = Input.GetAxisRaw("Horizontal");
+        var y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.W) && PlayerDirection != 2)
+        if (x != 0f && lastFrameInput.y != y )
         {
-
-            SnakeWantMoveUp = 1;
+            input = new Vector2(x, 0f);
         }
-        if (Input.GetKeyDown(KeyCode.S) && PlayerDirection != 1)
+        else if (y != 0f && lastFrameInput.x != x)
         {
-            SnakeWantMoveDown = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.A) && PlayerDirection != 4)
-        {
-            SnakeWantMoveLeft = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.D) && PlayerDirection != 3)
-        {
-            SnakeWantMoveRight = 1;
+            input = new Vector2(0f, y);
         }
 
     }

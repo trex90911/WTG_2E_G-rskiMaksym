@@ -1,6 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,12 +11,12 @@ public class MainMenuScript : MonoBehaviour
     }
     public void StartButtonAction()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadSceneAsync(1); //Używaj LoadSyncAsync.
     }
     public void QuitButtonAction()
-    { 
+    {
 #if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
     Application.Quit();
 #endif
