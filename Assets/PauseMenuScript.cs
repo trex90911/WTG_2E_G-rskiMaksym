@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,11 +16,28 @@ public class PauseMenuScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (IsPaused) { ResumeGame(); }
+            if (IsPaused) { ResumeGame(); } //taki zapis ifa jest nieczytelny
             else { PauseGame(); }
+
+            //Lepiej coś takiego:
+            /*
+            if (IsPaused) 
+                ResumeGame();
+            else
+                PauseGame(); 
+             */
         }
-            
+
     }
+
+    //Zamiast dwóch metod możesz mieć jedną
+    public void TogglePause(bool value)
+    {
+        PauseMenu.SetActive(value);
+        Time.timeScale = value ? 0f : 1f;
+        IsPaused = value;
+    }
+
     public void PauseGame() 
     {
         PauseMenu.SetActive(true);
@@ -33,9 +50,10 @@ public class PauseMenuScript : MonoBehaviour
         Time.timeScale = 1f;
         IsPaused = false;
     }
+
     public void GoToMainMenu()
     {
-    Time.timeScale = 1f;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 }
