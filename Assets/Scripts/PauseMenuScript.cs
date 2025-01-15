@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class PauseMenuScript : MonoBehaviour
 {
     public GameObject PauseMenu;
+    public GameObject WinMenu;
+    public GameObject DeathMenu;
+
     public bool IsPaused = false;
     void Start()
     {
@@ -16,33 +19,21 @@ public class PauseMenuScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (IsPaused) { ResumeGame(); } //taki zapis ifa jest nieczytelny
-            else { PauseGame(); }
-
-            //Lepiej coś takiego:
-            /*
-            if (IsPaused) 
+            if (IsPaused)
                 ResumeGame();
             else
-                PauseGame(); 
-             */
+                PauseGame();
         }
 
     }
-
-    //Zamiast dwóch metod możesz mieć jedną
-    public void TogglePause(bool value)
+    public void PauseGame()
     {
-        PauseMenu.SetActive(value);
-        Time.timeScale = value ? 0f : 1f;
-        IsPaused = value;
-    }
-
-    public void PauseGame() 
-    {
-        PauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        IsPaused = true;
+        if (WinMenu.activeInHierarchy == false && DeathMenu.activeInHierarchy == false)
+        {
+            PauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            IsPaused = true;
+        }
     }
     public void ResumeGame()
     {

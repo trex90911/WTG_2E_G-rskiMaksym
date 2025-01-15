@@ -11,7 +11,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void StartButtonAction()
     {
-        SceneManager.LoadSceneAsync(1); //Używaj LoadSyncAsync.
+        SceneManager.LoadSceneAsync(1);
     }
     public void QuitButtonAction()
     {
